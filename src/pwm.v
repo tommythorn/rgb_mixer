@@ -3,8 +3,8 @@
 module pwm (
     input wire clk,
     input wire reset,
-    output wire out,
-    input wire [7:0] level
+    input wire [7:0] level,
+    output wire out
     );
    parameter width = 8;
    reg [width-1:0] counter;

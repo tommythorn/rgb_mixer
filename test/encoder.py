@@ -29,7 +29,7 @@ class Encoder():
 
     async def update(self, incr = 1):
         await ClockCycles(self.clk, 1)
-        self.cycle += 1 
+        self.cycle += 1
         if self.cycle % self.clocks_per_phase == 0:
             # advance a phase
             self.a_phase = (self.a_phase + incr) % len(Encoder.CYCLE)
@@ -38,9 +38,9 @@ class Encoder():
             # if a transition just happened, make a note of where we are for triggering noisy edges
             if Encoder.CYCLE[self.a_phase] != Encoder.CYCLE[self.last_a_phase]:
                 self.a_edge = self.cycle
-            
+
             if Encoder.CYCLE[self.b_phase] != Encoder.CYCLE[self.last_b_phase]:
-                self.b_edge = self.cycle 
+                self.b_edge = self.cycle
 
             self.last_a_phase = self.a_phase
             self.last_b_phase = self.b_phase
@@ -54,4 +54,3 @@ class Encoder():
             self.a <= random.randint(0, 1)
         if (self.cycle - self.b_edge) < self.noise_cycles and random.random() < self.noise_chance:
             self.b <= random.randint(0, 1)
-
